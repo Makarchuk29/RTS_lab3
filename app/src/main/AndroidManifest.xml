@@ -10,12 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Lab3_3"
-            android:label="Лабораторна робота №3.3"/>
+            android:label="Лабораторна робота №3.3"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Lab3_2"
-            android:label="Лабораторна робота №3.2"/>
+            android:label="Лабораторна робота №3.2"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Lab3_1"
-            android:label="Лабораторна робота №3.1"/>
-        <activity android:name=".MainActivity">
+            android:label="Лабораторна робота №3.1"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
