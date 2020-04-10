@@ -13,7 +13,7 @@ public class Lab3_3 extends AppCompatActivity {
     private final static Random RANDOM = new Random();
     private final static int N = 4;
     private static int resultGenotype;
-    private int a, b, c, d, y;
+    private int a, b, c, d, y, numberOfMutation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +27,14 @@ public class Lab3_3 extends AppCompatActivity {
         String inputC = ((EditText) findViewById(R.id.c)).getText().toString();
         String inputD = ((EditText) findViewById(R.id.d)).getText().toString();
         String inputY = ((EditText) findViewById(R.id.y)).getText().toString();
+        String inputNumberOfMutation = ((EditText) findViewById(R.id.numberOfMutation)).getText().toString();
 
         if (inputA.isEmpty() || inputB.isEmpty() || inputC.isEmpty() || inputD.isEmpty() || inputY.isEmpty()) {
-            Toast.makeText(this, "Введіть всі значення!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Введіть всі значення рівняння!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (inputNumberOfMutation.isEmpty()) {
+            Toast.makeText(this, "Введіть кількість мутацій!", Toast.LENGTH_SHORT).show();
             return;
         }
         a = Integer.parseInt(inputA);
@@ -37,6 +42,11 @@ public class Lab3_3 extends AppCompatActivity {
         c = Integer.parseInt(inputC);
         d = Integer.parseInt(inputD);
         y = Integer.parseInt(inputY);
+        numberOfMutation = Integer.parseInt(inputNumberOfMutation);
+        if (numberOfMutation>N*N){
+            Toast.makeText(this, "Занадто велика кількість мутацій!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         int f;
         int[] deltas = new int[N];
         int[][] population = generatePopulation();
@@ -99,13 +109,14 @@ public class Lab3_3 extends AppCompatActivity {
             newGen[i][2] = oldPopulation[root2][2];
             newGen[i][3] = oldPopulation[root2][3];
         }
-        double mutationProbabilities = 0.1;
-        generateMutation(newGen, mutationProbabilities);
+//        double mutationProbabilities = 0.1;
+        generateMutation(newGen);
         return newGen;
     }
 
-    private int[][] generateMutation(int[][] population, double mutationProbabilities){
-        int numberOfMutation = (int) Math.round(mutationProbabilities*N*N);
+    private int[][] generateMutation(int[][] population){
+//        int numberOfMutation = (int) Math.round(mutationProbabilities*N*N);
+
         for (int i = 0; i < numberOfMutation; i++) {
             population[RANDOM.nextInt(N)][RANDOM.nextInt(N)] = RANDOM.nextInt(y);
         }
